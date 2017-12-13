@@ -1,0 +1,197 @@
+#include <LiquidCrystal.h>
+#define arr_len( x )  ( sizeof( x ) / sizeof( *x ) )
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+int i = 1;
+int state = 0;
+char tape[] = {'0'} ;      // create the tape 
+char yo[] = {'Y', 'O', 'O', 'U'}; 
+char marge[] = {'H', 'E', 'L', 'L', '0', ' ', 'M', 'A', 'R', 'G', 'E'} ;      // create the tape 
+char drank[] = {'D', 'R', 'I', 'N', 'K', 'Z'} ; 
+char drankit[] =  {'W', 'O', 'O', 'O', 'O', '!'} ; 
+char drink2[] =   {'H', 'E', 'L', 'L', '0', ' ', 'M', 'A', 'R', 'G', 'E'} ; 
+char setone[] =   {'R', 'U', 'M', ' ', 'A', 'N', 'D', ' ', 'C', 'O', 'K', 'E', ' ', ' ', ' ', ' ' } ; 
+char settwo[] =   {'W', 'H', 'I', 'S', 'K', 'E', 'Y', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' } ; 
+
+char alphaone[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ' ', 'J', 'K', 'L', 'M', 'N', 'O', 'P' };  
+char alphamid[] = {'M', 'I', 'D', ' ', 'A', 'L', 'P', 'H', 'A', 'Z', '1', '2', '3', '4', '5', '6' };
+char alphatwo[] = {'T', 'H', 'I', 'S', ' ', 'I', 'S', ' ', 'W', 'H', 'I', 'S', 'K', 'E', 'Y', ' ' } ; 
+
+
+int sensorPin = A0;    // select the input pin for the potentiometer
+int sensorValue = 0;  // variable to store the value coming from the sensor
+
+void setup() {
+
+  Serial.begin(9600);
+  lcd.begin(16, 2);     // set up the LCD's number of columns and rows
+
+  //lcd.setCursor(x, y);
+  //lcd.print(tape);                                    // display the tape
+}
+
+void loop() {
+    //sensorValue = analogRead(sensorPin);
+    //Serial.println(sensorValue);
+    //lcd.print(sensorValue); 
+
+    lcd.setCursor(0, 0);
+    lcd.print(alphaone);  
+    delay(2500);
+
+    lcd.setCursor(0, 1);
+    lcd.print(alphatwo);  
+    delay(2500);
+
+    clear1();
+    clear2();
+    clear3(); 
+
+    lcd.setCursor(0, 0);
+    lcd.print(alphamid);  
+    delay(2500);
+
+    lcd.setCursor(0, 1);
+    lcd.print(alphaone);  
+    delay(2500);
+
+    
+    clear1();
+    clear2();
+    clear3(); 
+
+}
+
+/////////////////////////////////////////////////////////////////////////
+////////////////////////////FUNCTIONS////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+void cleararrow() {       // overwrite the old arrow since the reader is moving 
+  lcd.setCursor(i, 1);
+  lcd.print(' ');
+}
+
+void clear1(){
+    lcd.setCursor(0, 0);
+    lcd.print(' ');
+    lcd.setCursor(1, 0);
+    lcd.print(' ');
+    lcd.setCursor(2, 0);
+    lcd.print(' ');
+    lcd.setCursor(3, 0);
+    lcd.print(' ');
+    lcd.setCursor(4, 0);
+    lcd.print(' ');
+    lcd.setCursor(5, 0);
+    lcd.print(' ');
+    lcd.setCursor(6, 0);
+    lcd.print(' ');
+    lcd.setCursor(7, 0);
+    lcd.print(' ');
+    lcd.setCursor(8, 0);
+    lcd.print(' ');
+    lcd.setCursor(9, 0);
+    lcd.print(' ');
+    lcd.setCursor(10, 0);
+    lcd.print(' ');
+    lcd.setCursor(11, 0);
+    lcd.print(' ');
+    lcd.setCursor(12, 0);
+    lcd.print(' ');
+    lcd.setCursor(13, 0);
+    lcd.print(' ');
+    lcd.setCursor(14, 0);
+    lcd.print(' ');
+    lcd.setCursor(15, 0);
+    lcd.print(' ');
+    lcd.setCursor(16, 0);
+    lcd.print(' ');
+}
+
+
+void clear2(){
+    lcd.setCursor(0, 1);
+    lcd.print(' ');
+    lcd.setCursor(1, 1);
+    lcd.print(' ');
+    lcd.setCursor(2, 1);
+    lcd.print(' ');
+    lcd.setCursor(3, 1);
+    lcd.print(' ');
+    lcd.setCursor(4, 1);
+    lcd.print(' ');
+    lcd.setCursor(5, 1);
+    lcd.print(' ');
+    lcd.setCursor(6, 1);
+    lcd.print(' ');
+    lcd.setCursor(7, 1);
+    lcd.print(' ');
+    lcd.setCursor(8, 1);
+    lcd.print(' ');
+    lcd.setCursor(9, 1);
+    lcd.print(' ');
+    lcd.setCursor(10, 1);
+    lcd.print(' ');
+    lcd.setCursor(11, 1);
+    lcd.print(' ');
+    lcd.setCursor(12, 1);
+    lcd.print(' ');
+    lcd.setCursor(13, 1);
+    lcd.print(' ');
+    lcd.setCursor(14, 1);
+    lcd.print(' ');
+    lcd.setCursor(15, 1);
+    lcd.print(' ');
+    lcd.setCursor(16, 1);
+    lcd.print(' ');
+}
+
+void clear3(){
+    lcd.setCursor(0, 2);
+    lcd.print(' ');
+    lcd.setCursor(1, 2);
+    lcd.print(' ');
+    lcd.setCursor(2, 2);
+    lcd.print(' ');
+    lcd.setCursor(3, 2);
+    lcd.print(' ');
+    lcd.setCursor(4, 2);
+    lcd.print(' ');
+    lcd.setCursor(5, 2);
+    lcd.print(' ');
+    lcd.setCursor(6, 2);
+    lcd.print(' ');
+    lcd.setCursor(7, 2);
+    lcd.print(' ');
+    lcd.setCursor(8, 2);
+    lcd.print(' ');
+    lcd.setCursor(9, 2);
+    lcd.print(' ');
+    lcd.setCursor(10, 2);
+    lcd.print(' ');
+    lcd.setCursor(11, 2);
+    lcd.print(' ');
+    lcd.setCursor(12, 2);
+    lcd.print(' ');
+    lcd.setCursor(13, 2);
+    lcd.print(' ');
+    lcd.setCursor(14, 2);
+    lcd.print(' ');
+    lcd.setCursor(15, 2);
+    lcd.print(' ');
+    lcd.setCursor(16, 2);
+    lcd.print(' ');
+}
+
+//void printrow1() {        // print the new tape 
+//  lcd.setCursor(0, 0);
+//  lcd.print(tape);  
+//  delay(1500);  
+//}
+//
+//void printrow2() {        // print the new tape 
+//  lcd.setCursor(0, 2);
+//  lcd.print(tape);  
+//  delay(1500);  
+//}
