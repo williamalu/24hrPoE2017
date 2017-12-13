@@ -13,6 +13,10 @@ byte drink2pos;
 byte drink3pos;
 byte drink4pos;
 
+#define ORIGIN 0
+#define FULL_OFF 130
+#define FULL_ON 180
+
 // include LCD screen stuff
 
 // this script should take in whatever button is pressed and use 
@@ -29,7 +33,7 @@ int selectedDrink = 0;
 
 int counter = 0;
 
-int threshold = 150; // closer == higher number
+int threshold = 330; // closer == higher number
 
 int pos = 60;
 int pos2 = 90;
@@ -49,6 +53,9 @@ long lastDebounceTime1 = 0;
 long lastPress2 = 0;
 long lastDebounceTime2 = 0;
 
+long delayMillis = 200;
+long fulloff = 130;
+long fullon = 180;
 
 long debounceDelay = 2000;
 
@@ -61,11 +68,15 @@ void setup() {
   Drinker2.attach(6);
   Drinker3.attach(7);
   Drinker4.attach(4);
+
+  
   Serial.begin(9600);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+
 
   // Display the three drink options on the screen
   Serial.print("Button State 1 Val = ");
@@ -149,9 +160,7 @@ void loop() {
   }
   buttonState1 = digitalRead(buttonPin1); //gets button state so we can check next time through the loop if it's different
   buttonState2 = digitalRead(buttonPin2); //gets button state so we can check next time through the loop if it's different
-
-  delay(1500);
-
+  delay(1000);
 
 }
 
@@ -163,20 +172,19 @@ void Drink1(){
   Serial.print("this is sensor 1");
   Serial.print(sensD1);
   if (sensD1 > threshold){
+    Serial.println();
+    Serial.println("Sensor 1 is bigger than threshold");
      // turn on motor1 for 1 sec or something
-      for (pos = 0; pos <=60; pos +=1){
-        Drinker1.write(pos); // tells servo to go to position at pos
-        delay(15); // waits 10ms for servo to reach the position
-      }
-    
+      Drinker1.write(FULL_ON);
+      delay(100);
+      Drinker1.write(FULL_OFF);
   }
-  
-  if (sensD3 > threshold){
-      for (pos = 0; pos <=60; pos +=1){
-        Drinker3.write(pos); // tells servo to go to position at pos
-        delay(15); // waits 10ms for servo to reach the position
-      }  
-  }
+//  if (sensD3 > threshold){
+//      Drinker3.write(FULL_ON);
+//      delay(delayMillis);
+//      Drinker3.write(FULL_OFF);
+//      
+//  }
 }
 
 void Drink2(){
@@ -184,16 +192,14 @@ void Drink2(){
  // sensD1 = analogRead(pinDrink1);
  // sensD2 = analogRead(pinDrink2);
   if (sensD1 > threshold){
-      for (pos = 60; pos <=0; pos +=1){
-        Drinker1.write(pos); // tells servo to go to position at pos
-        delay(15); // waits 10ms for servo to reach the position
-      }
+           Drinker1.write(fullon);
+      delay(delayMillis);
+      Drinker1.write(fulloff);
   }
   if (sensD2 > threshold){
-      for (pos = 60; pos <=120; pos -=1){
-        Drinker2.write(pos); // tells servo to go to position at pos
-        delay(15); // waits 10ms for servo to reach the position
-      }
+            Drinker2.write(FULL_ON);
+      delay(delayMillis);
+      Drinker2.write(FULL_OFF);
   }
 
 }
@@ -203,17 +209,15 @@ void Drink3(){
   sensD2 = analogRead(pinDrink2);
   sensD3 = analogRead(pinDrink3);
   if (sensD2 > threshold){
-      for (pos = 0; pos <=60; pos +=1){
-        Drinker2.write(pos); // tells servo to go to position at pos
-        delay(15); // waits 10ms for servo to reach the position
-      }
+      Drinker2.write(FULL_ON);
+      delay(delayMillis);
+      Drinker2.write(FULL_OFF);
   }
-  if (sensD3 > threshold){
-      for (pos = 0; pos <=60; pos +=1){
-        Drinker3.write(pos); // tells servo to go to position at pos
-        delay(15); // waits 10ms for servo to reach the position
-      }
-  }
+//  if (sensD3 > threshold){
+//      Drinker3.write(FULL_ON);
+//      delay(delayMillis);
+//      Drinker3.write(FULL_OFF);
+//  }
   
 }
 
@@ -223,17 +227,15 @@ void Drink4(){
   sensD1 = analogRead(pinDrink1);
   sensD4 = analogRead(pinDrink4);
   if (sensD1 > threshold){
-      for (pos = 0; pos <=60; pos +=1){
-        Drinker1.write(pos); // tells servo to go to position at pos
-        delay(15); // waits 10ms for servo to reach the position
-      }
+      Drinker1.write(FULL_ON);
+      delay(delayMillis);
+      Drinker1.write(FULL_OFF);
   }
-  if (sensD4 > threshold){
-      for (pos = 0; pos <=60; pos +=1){
-        Drinker4.write(pos); // tells servo to go to position at pos
-        delay(15); // waits 10ms for servo to reach the position
-      }
-  }
+//  if (sensD4 > threshold){
+//      Drinker4.write(FULL_ON);
+//      delay(delayMillis);
+//      Drinker4.write(FULL_OFF);
+//  }
   
 }
 
